@@ -14,7 +14,5 @@ RUN  dpkg -i snapserver_${snapcast_version}-1_armhf.deb \
   && rm -rf /var/lib/apt/lists/*
 RUN /usr/bin/snapserver -v
 
-COPY snapserver.conf /etc/snapserver.conf
-
 EXPOSE 1704 1705 1780
 ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapserver"]
