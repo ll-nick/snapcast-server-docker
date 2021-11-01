@@ -1,6 +1,7 @@
 #!/bin/bash
 
 docker run \
+ --name=snapcast-server \
  --rm \
  --user root \
  -it \
