@@ -2,7 +2,7 @@ ARG BUILD_FROM=balena:raspbian
 
 FROM $BUILD_FROM
 
-ARG snapcast_version=0.25.0
+ARG snapcast_version=0.26.0
 
 RUN  apt-get update \
   && apt-get install -y wget ca-certificates \
@@ -17,4 +17,4 @@ RUN /usr/bin/snapserver -v
 ENV TZ=Europe/Berlin
 
 EXPOSE 1704 1705 1780
-ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapserver"]
+ENTRYPOINT [ "/usr/bin/snapserver" ]
