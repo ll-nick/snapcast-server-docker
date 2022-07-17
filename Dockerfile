@@ -2,16 +2,17 @@ ARG BUILD_FROM=balena:raspbian
 
 FROM $BUILD_FROM
 
-ARG snapcast_version=0.26.0
-
-RUN  apt-get update \
-  && apt-get install -y wget ca-certificates \
-  && rm -rf /var/lib/apt/lists/*
-RUN  wget https://github.com/badaix/snapcast/releases/download/v${snapcast_version}/snapserver_${snapcast_version}-1_armhf.deb
-RUN  dpkg -i snapserver_${snapcast_version}-1_armhf.deb \
-  ;  apt-get update \
-  && apt-get -f install -y \
-  && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install --no-install-recommends -y \
+    ca-certificates \
+    curl \
+    jq && \
+    rm -rf /var/lib/apt/lists/*
+RUN DOWNLOAD_URL=$(curl -s https://api.github.com/repos/badaix/snapcast/releases/latest | jq -r '.assets[] | .browser_download_url' | grep snapserver.*1_armhf.deb) && \
+    curl -L --output snapserver.deb $DOWNLOAD_URL
+RUN apt-get update && \
+    apt-get install ./snapserver.deb && \
+    rm -rf snapserver.deb /var/lib/apt/lists/*
 RUN /usr/bin/snapserver -v
 
 ENV TZ=Europe/Berlin
