@@ -6,7 +6,8 @@ RUN apt-get update && \
     apt-get install --no-install-recommends -y \
     ca-certificates \
     curl \
-    jq && \
+    jq \
+    sox && \
     rm -rf /var/lib/apt/lists/*
 RUN DOWNLOAD_URL=$(curl -s https://api.github.com/repos/badaix/snapcast/releases/latest | jq -r '.assets[] | .browser_download_url' | grep snapserver.*1_armhf.deb) && \
     curl -L --output snapserver.deb $DOWNLOAD_URL
