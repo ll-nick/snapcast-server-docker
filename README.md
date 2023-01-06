@@ -1,4 +1,12 @@
 # snapcast-server-docker
+
+## >> Deprecated <<
+
+There is now a single repo for both server and client that additionally features autobuilds and multi-arch images:
+https://github.com/ll-nick/snapcast-docker
+
+
+## What's in here?
 Snapcast server for multi-room audio.
 
 Based off of https://github.com/IVData/dockerfiles/tree/master/snapserver.
